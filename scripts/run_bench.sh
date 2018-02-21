@@ -1,13 +1,14 @@
 #!/bin/bash
 set -x
 echo "do nothing"
-lscpu
+#lscpu
 
-CEPETRO_PATH="~/cepetro"
-apt install g++
+CEPETRO_PATH="../../cepetro/cepetro-codes"
+sudo apt install g++
 
-ls $CEPETRO_PATH
-# g++ -std=c++11 $CEPETRO_PATH/src/main-openMP.cpp $CEPETRO_PATH/src/File.cpp $CEPETRO_PATH/src/SuFile.cpp $CEPETRO_PATH/src/DifferentialEvolution.cpp -o main -fopenmp -g -O3
+#ls $CEPETRO_PATH
+
+g++ -std=c++11 $CEPETRO_PATH/src/main-openMP.cpp $CEPETRO_PATH/src/File.cpp $CEPETRO_PATH/src/SuFile.cpp $CEPETRO_PATH/src/DifferentialEvolution.cpp -o main -fopenmp -g -O3
 
 
 # SMALL=
