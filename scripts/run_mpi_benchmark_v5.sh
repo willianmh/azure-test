@@ -145,3 +145,5 @@ az vm stop --no-wait --ids $(
 # if [ -d "$MOUNTPOINT" ]; then
 #     cp -r results "$MOUNTPOINT/results_$(whoami)$(date +%s)"
 # fi
+
+echo "Done"
