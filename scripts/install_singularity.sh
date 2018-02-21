@@ -24,7 +24,7 @@ sudo apt-get install -y wget make gcc libgfortran3 tmux htop git sysstat libibne
 # wget -q https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-3.0.0.tar.gz
 # tar -zxf openmpi-3.0.0.tar.gz
 # cd openmpi-3.0.0
-# ./configure --with-device=ch3:ssm --prefix="/home/$USER/.openmpi" # --enable-mpirun-prefix-by-default # 
+# ./configure --with-device=ch3:ssm --prefix="/home/$USER/.openmpi" # --enable-mpirun-prefix-by-default #
 # make -j && sudo make install
 # cat <<EOT >> ~/.bashrc
 # export PATH="$PATH:/home/$USER/.openmpi/bin"
@@ -52,10 +52,10 @@ if [[ $SWAP ]]; then
 	sudo bash -c "echo '/swapfile swap swap defaults 0 0' >> /etc/fstab"
 fi
 
-# creade and setup the shared folder 
+# creade and setup the shared folder
 sudo mkdir /home/username/mymountpoint
 echo "${1}" > pass
-sudo bash -c 'echo "//test1diag281.file.core.windows.net/shared-fs /home/username/mymountpoint cifs nofail,vers=3.0,username=test1diag281,password=`cat pass`,dir_mode=0777,file_mode=0777,serverino" >> /etc/fstab'
+sudo bash -c 'echo "//machinetesti.file.core.windows.net/doc /home/username/pasta cifs nofail,vers=3.0,username=test1diag281,password=`cat pass`,dir_mode=0777,file_mode=0777,serverino" >> /etc/fstab'
 rm pass
 sudo mount -a
 
@@ -104,7 +104,3 @@ if [[ 0 ]]; then
 	# clear your shell's command hash cache
 	hash -r
 fi
-
-
-
-
