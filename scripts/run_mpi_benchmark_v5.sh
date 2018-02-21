@@ -123,6 +123,7 @@ mkdir -p ${RESULTS_DIRECTORY}
 echo "To tedeleting the resource ${GROUP_NAME}"
 az group delete --resource-group ${GROUP_NAME} --yes --no-wait
 # usage example
+az group wait --name TutorialResources --deleted
 
 az vm deallocate --no-wait --ids $(
     az vm list --query "[].id" -o tsv | grep -i "${GROUP_NAME}"
