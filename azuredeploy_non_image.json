@@ -454,7 +454,8 @@
         "settings": {
           "fileUris": [
             "[concat(parameters('_artifactsLocation'), '/', variables('scriptFolder'), '/', variables('scriptFileName'))]"
-          ]
+          ],
+           "commandToExecute": "[concat('./', variables('scriptFileName'), ' ', parameters('scriptParameterPassMount'))]"
         }
       }
     }
