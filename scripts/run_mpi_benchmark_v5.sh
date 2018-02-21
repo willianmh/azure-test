@@ -27,7 +27,7 @@ createMachines(){
     # az group deployment create --verbose --debug --name SingularityTest --resource-group $GROUP_NAME \
     # --template-uri "https://raw.githubusercontent.com/jeferrb/AzureTemplates/master/azuredeploy.json" \
     az group deployment create --name "spitzWorker$(whoami)$(date +%s)" --resource-group $GROUP_NAME \
-    --template-file azuredeploy_non_image.json --parameters vmSize="${VM_SIZE}" vmName="testMpi${1}" dnsLabelPrefix="my${GROUP_NAME}dnsprefix${1}" \
+    --template-file azuredeploy_non_image.json --parameters vmSize="${VM_SIZE}" vmName="spitz${1}" dnsLabelPrefix="my${GROUP_NAME}dnsprefix${1}" \
     adminPassword=$2 scriptParameterPassMount=$3 adminPublicKey="`cat ~/.ssh/id_rsa.pub`" >> ${LOG_FILE}
 }
 
@@ -116,12 +116,12 @@ ssh ${SSH_ADDR} << EOF
     bash ./run_bench.sh ${NUMBER_REPETITIONS} ${BIN_PATH} ${NUMBER_JOBS}
 EOF
 mkdir -p ${RESULTS_DIRECTORY}
-scp "${SSH_ADDR}:/home/username/*.log" ${RESULTS_DIRECTORY}
-scp "${SSH_ADDR}:/home/username/*.sa" ${RESULTS_DIRECTORY}
+# scp "${SSH_ADDR}:/home/username/*.log" ${RESULTS_DIRECTORY}
+# scp "${SSH_ADDR}:/home/username/*.sa" ${RESULTS_DIRECTORY}
 
 # pause "Press [Enter] key to delete the group ${GROUP_NAME}"
 echo "To tedeleting the resource ${GROUP_NAME}"
-# az group delete --resource-group ${GROUP_NAME} --yes --no-wait
+az group delete --resource-group ${GROUP_NAME} --yes --no-wait
 # usage example
 
 az vm deallocate --no-wait --ids $(
@@ -137,9 +137,9 @@ set +x
 #     az vm list --query "[].id" -o tsv | grep -i "${GROUP_NAME}"
 # )
 
-# az vm stop --no-wait --ids $(
-#     az vm list --query "[].id" -o tsv | grep -i "${GROUP_NAME}"
-# )
+az vm stop --no-wait --ids $(
+    az vm list --query "[].id" -o tsv | grep -i "${GROUP_NAME}"
+)
 
 # MOUNTPOINT=~/mountpoint/
 # if [ -d "$MOUNTPOINT" ]; then
