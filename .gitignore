@@ -1,0 +1,10 @@
+.DS_Store
+*.log
+*.log.old
+*.pub
+*.out
+hostfile
+results/*
+scripts/matrix_mul/results*
+=8.0
+=9.0

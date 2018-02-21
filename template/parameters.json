@@ -1,0 +1,51 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "southcentralus"
+        },
+        "virtualMachineName": {
+            "value": "pinguim"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_F4s"
+        },
+        "adminUsername": {
+            "value": "username"
+        },
+        "virtualNetworkName": {
+            "value": "teste-1-vnet"
+        },
+        "networkInterfaceName": {
+            "value": "pinguim906"
+        },
+        "diskSizeGB": {
+            "value": "30"
+        },
+        "networkSecurityGroupName": {
+            "value": "pinguim-nsg"
+        },
+        "adminPublicKey": {
+            "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDVTeqxOjfxz4/b+c5iWBkHk/Ki36047Muu4rD87IcYXwYYzUmhW0Ogx3K3oMoE4Z2nyOTpOHe5cqL97e1+eeixCwYIlOujzl5itDrDp2J3LcLI9p6b76b/AKATbDHTlkQwgh9zkyp5VxqafhrOCBsg+aP/7dPL9oMkRag+nlcyaZ3CW8dpkTn2V9IuA5anaHI2jyVKdJISJ/BuNA6f4QE/Rr0xj9NKBk9KPIbEGbmvbY19m5laWO2Az4MSqOqqIOsvOp4Zua6jbdx6Xi6WlSygjDSsC4CqaQ9Gse1AmEUsxxyhmtDC46XuymWOqDhr2i2Bvf7s3lFppz/ZdlSm2pCt"
+        },
+        "diagnosticsStorageAccountName": {
+            "value": "mpi6235diag587"
+        },
+        "diagnosticsStorageAccountId": {
+            "value": "/subscriptions/de480004-2ade-43c6-a6b1-c7b4f584ebd3/resourceGroups/mpi6235/providers/Microsoft.Storage/storageAccounts/mpi6235diag587"
+        },
+        "subnetName": {
+            "value": "default"
+        },
+        "publicIpAddressName": {
+            "value": "pinguim-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Dynamic"
+        },
+        "publicIpAddressSku": {
+            "value": "Basic"
+        }
+    }
+}
