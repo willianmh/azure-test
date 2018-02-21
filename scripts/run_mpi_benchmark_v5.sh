@@ -85,62 +85,61 @@ for i in `grep "ssh " ${LOG_FILE} | cut -d '@' -f 2 | rev | cut -c 2- | rev`; do
     ssh-copy-id -f -i ${LOG_DIR}/id_rsa_coodinator_${GROUP_NAME}.pub "username@${i}"
 done
 
-rm ${LOG_DIR}/hostfile
-for host in `seq 4 $(echo ${NUMBER_INSTANCES}+3 | bc)`; do
-    echo "10.0.0.${host} slots=${NUMBER_RROCESSORS}" >> ${LOG_DIR}/hostfile
-done
-
-scp scripts/run_bench.sh ${LOG_DIR}/hostfile ${SSH_ADDR}:
 # rm ${LOG_DIR}/hostfile
+# for host in `seq 4 $((${NUMBER_INSTANCES}+3))`; do
+#     echo "10.0.0.${host} slots=${NUMBER_RROCESSORS}" >> ${LOG_DIR}/hostfile
+# done
 
-
-set +x
+# rm ${LOG_DIR}/hostfile
 
 
 ssh ${SSH_ADDR} << EOF
     set -x
     # Add all nodes to known hosts and copy the private key to all machines
     rm ~/.ssh/known_hosts
-    for host in \`seq 4 $(echo ${NUMBER_INSTANCES}+3 | bc)\`; do
+    for host in \`seq 4 $((${NUMBER_INSTANCES}+3))\`; do
         ssh-keyscan -H "10.0.0.\${host}" >> ~/.ssh/known_hosts
         scp .ssh/id_rsa .ssh/id_rsa.pub "10.0.0.\${host}":.ssh
     done
     # Copy known host that contains all machines to all machines
-    for host in \`seq 4 $(echo ${NUMBER_INSTANCES}+3 | bc)\`; do
+    for host in \`seq 4 $((${NUMBER_INSTANCES}+3))\`; do
         scp .ssh/known_hosts "10.0.0.\${host}":.ssh
     done
 EOF
 
+scp scripts/run_crs_DE-local.sh ${SSH_ADDR}:pasta/
+
 #execute the benchmark
 ssh ${SSH_ADDR} << EOF
-    bash ./run_crs_DE-local.sh
+    chmod +x pasta/run_crs_DE-local.sh
+
+    for host in \`seq 4 $((${NUMBER_INSTANCES}+3))\`; do
+        ssh 10.0.0.$host ./pasta/run_crs_DE-local.sh >> pasta/log-$host.out
+    done
 EOF
-mkdir -p ${RESULTS_DIRECTORY}
+# mkdir -p ${RESULTS_DIRECTORY}
 # scp "${SSH_ADDR}:/home/username/*.log" ${RESULTS_DIRECTORY}
-# scp "${SSH_ADDR}:/home/username/*.sa" ${RESULTS_DIRECTORY}
+scp -r "${SSH_ADDR}:/home/username/results" .
 
 # pause "Press [Enter] key to delete the group ${GROUP_NAME}"
 echo "To tedeleting the resource ${GROUP_NAME}"
-az group delete --resource-group ${GROUP_NAME} --yes --no-wait
+# az group delete --resource-group ${GROUP_NAME} --yes
 # usage example
-az group wait --name TutorialResources --deleted
+# az group wait --name TutorialResources --deleted
 
-az vm deallocate --no-wait --ids $(
-    az vm list --query "[].id" -o tsv | grep -i "${GROUP_NAME}"
-)
-
-set +x
-
+# az vm deallocate --no-wait --ids $(
+#     az vm list --query "[].id" -o tsv | grep -i "${GROUP_NAME}"
+# )
 
 # az vm list --query "[].id" -o tsv | grep -i "${GROUP_NAME}"
 # example usage
 # az vm start --no-wait --ids $(
 #     az vm list --query "[].id" -o tsv | grep -i "${GROUP_NAME}"
 # )
-
-az vm stop --no-wait --ids $(
-    az vm list --query "[].id" -o tsv | grep -i "${GROUP_NAME}"
-)
+#
+# az vm stop --no-wait --ids $(
+#     az vm list --query "[].id" -o tsv | grep -i "${GROUP_NAME}"
+# )
 
 # MOUNTPOINT=~/mountpoint/
 # if [ -d "$MOUNTPOINT" ]; then

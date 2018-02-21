@@ -275,7 +275,7 @@
     },
     "_artifactsLocation": {
       "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/jeferrb/AzureTemplates/master",
+      "defaultValue": "https://raw.githubusercontent.com/willianmh/azure/master",
       "metadata": {
         "description": "The base URI where artifacts required by this template are located"
       }
@@ -293,7 +293,7 @@
     "nicName": "[concat(parameters('vmName'), 'myVMNic', parameters('dnsLabelPrefix'))]",
     "publicIPAddressName": "[concat(parameters('vmName'), 'myPublicIP', parameters('dnsLabelPrefix'))]",
     "publicIPAddressType": "Dynamic",
-    "scriptFileName": "install_singularity.sh",
+    "scriptFileName": "initial_script.sh",
     "scriptFolder": "scripts",
     "subnetName": "Subnet",
     "subnetPrefix": "10.0.0.0/24",
@@ -437,14 +437,14 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'), '/InstallSingularity')]",
+      "name": "[concat(parameters('vmName'), '/InitialScript')]",
       "location": "[resourceGroup().location]",
       "apiVersion": "2015-06-15",
       "dependsOn": [
           "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
       ],
       "tags": {
-          "displayName": "InstallSingularity"
+          "displayName": "InitialScript"
       },
       "properties": {
           "publisher": "Microsoft.Azure.Extensions",
