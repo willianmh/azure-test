@@ -113,7 +113,7 @@ EOF
 
 #execute the benchmark
 ssh ${SSH_ADDR} << EOF
-    bash ./run_bench.sh ${NUMBER_REPETITIONS} ${BIN_PATH} ${NUMBER_JOBS}
+    bash ./run_crs_DE-local.sh
 EOF
 mkdir -p ${RESULTS_DIRECTORY}
 # scp "${SSH_ADDR}:/home/username/*.log" ${RESULTS_DIRECTORY}
