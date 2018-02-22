@@ -298,7 +298,7 @@
     "subnetName": "Subnet",
     "subnetPrefix": "10.0.0.0/24",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets',variables('virtualNetworkName'), variables('subnetName'))]",
-    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'singvm')]",
+    "storageAccountName": "machinetesti",
     "storageAccountType": "Standard_LRS",
     "virtualNetworkName": "MyVNET"
     },
