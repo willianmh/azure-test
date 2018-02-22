@@ -15,9 +15,8 @@ export DEBIAN_FRONTEND=noninteractive
 
 touch hey.txt
 
-sudo apt-get -y update
-sudo apt-get -y upgrade
-sudo apt-get -y install g++
+sudo apt update
+sudo apt install g++
 
 sudo mkdir /home/username/mymountpoint
 echo "${1}" > pass
