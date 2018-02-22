@@ -1,18 +1,6 @@
 #!/bin/bash
 
-LOGFILE="/home/username/instalation.log"
-
-#check network conction
-ATTEMPTS=0
-while [ $(nc -zw1 google.com 443) ] && [ "$ATTEMPTS" -lt 5 ]; do
-  echo "we have NO connectivity" &>> ${LOGFILE}
-  sleep 15
-  ATTEMPTS=$((ATTEMPTS+1))
-done
-
 #Install MPI and dependencies
-export DEBIAN_FRONTEND=noninteractive
-
 sudo apt-get -y update
 sudo apt-get -y upgrade
 sudo apt-get -y install g++ gcc htop
