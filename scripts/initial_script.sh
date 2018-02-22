@@ -13,9 +13,9 @@ done
 #Install MPI and dependencies
 export DEBIAN_FRONTEND=noninteractive
 
-sudo apt update
-sudo apt upgrade
-sudo apt install g++
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y install g++ gcc htop
 
 sudo mkdir /home/username/mymountpoint
 echo "${1}" > pass
@@ -24,7 +24,9 @@ rm pass
 sudo mount -a
 
 # sudo mount -t cifs //machinetesti.file.core.windows.net/doc /home/username/mymountpoint -o vers=3.0,username=machinetesti,password=pDyMoTChRGvm1/Pp0sz4USreLsttxoDa2xLKp/JXYWzppPUquesDLD7jerlLqdxSYGOGsLqRe8uYTLwtBW+AhQ==,dir_mode=0777,file_mode=0777,sec=ntlmssp
-
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y install g++ gcc htop
 sudo touch /home/username/mymountpoint/ola.txt
 
 echo "config done"

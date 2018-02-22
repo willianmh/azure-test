@@ -107,14 +107,14 @@ ssh ${SSH_ADDR} << EOF
     done
 EOF
 
-scp scripts/run_crs_DE-local.sh ${SSH_ADDR}:pasta/
+scp scripts/run_crs_DE-local.sh ${SSH_ADDR}:mymountpoint/
 
 #execute the benchmark
 ssh ${SSH_ADDR} << EOF
-    chmod +x pasta/run_crs_DE-local.sh
+    chmod +x mymountpoint/run_crs_DE-local.sh
 
     for host in \`seq 4 $((${NUMBER_INSTANCES}+3))\`; do
-        ssh 10.0.0.$host ./pasta/run_crs_DE-local.sh >> pasta/log-$host.out
+        ssh 10.0.0.$host ./mymountpoint/run_crs_DE-local.sh >> mymountpoint/log-$host.out
     done
 EOF
 # mkdir -p ${RESULTS_DIRECTORY}
