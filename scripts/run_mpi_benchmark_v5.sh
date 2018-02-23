@@ -107,7 +107,7 @@ ssh ${SSH_ADDR} << EOF
     done
 EOF
 
-scp scripts/run_crs_DE-local.sh ${SSH_ADDR}:mymountpoint/
+scp scripts/run_crs_DE-local.sh ${SSH_ADDR}:mymountpoint/cepetro-codes
 
 #execute the benchmark
 ssh ${SSH_ADDR} << EOF

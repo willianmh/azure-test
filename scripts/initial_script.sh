@@ -13,7 +13,7 @@ done
 #Install MPI and dependencies
 export DEBIAN_FRONTEND=noninteractive
 
-touch hey.txt
+sudo touch /home/username/hey.txt
 
 sudo apt update
 sudo apt install g++
